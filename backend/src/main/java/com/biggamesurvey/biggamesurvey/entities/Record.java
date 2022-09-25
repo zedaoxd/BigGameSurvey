@@ -23,6 +23,7 @@ public class Record implements Serializable {
 
     private Integer age;
 
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant moment;
 
     @ManyToOne

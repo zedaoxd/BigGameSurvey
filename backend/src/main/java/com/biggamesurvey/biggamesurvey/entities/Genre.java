@@ -4,8 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_genre")
@@ -24,5 +24,5 @@ public class Genre implements Serializable {
 
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "genre")
-    private Set<Game> games = new HashSet<>();
+    private List<Game> games = new ArrayList<>();
 }
