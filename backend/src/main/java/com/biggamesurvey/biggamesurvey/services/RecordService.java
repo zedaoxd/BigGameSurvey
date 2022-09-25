@@ -7,6 +7,8 @@ import com.biggamesurvey.biggamesurvey.entities.Record;
 import com.biggamesurvey.biggamesurvey.repositories.GameRepository;
 import com.biggamesurvey.biggamesurvey.repositories.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,5 +34,12 @@ public class RecordService {
         entity.setGame(gameRepository.getReferenceById(insertDTO.getGameId()));
         entity = repository.save(entity);
         return new RecordDTO(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<RecordDTO> findByMoments(Pageable pageable, Instant start, Instant end) {
+        if (start == null || end == null)
+            return repository.findAll(pageable).map(RecordDTO::new);
+        return repository.findByMomentBetween(start, end, pageable).map(RecordDTO::new);
     }
 }
