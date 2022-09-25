@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class GameServices {
+public class GameService {
 
     private final GameRepository repository;
 
-    public GameServices(GameRepository repository) {
+    public GameService(GameRepository repository) {
         this.repository = repository;
     }
 
